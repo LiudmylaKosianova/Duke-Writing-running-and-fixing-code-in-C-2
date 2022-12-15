@@ -1,7 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
-//I've provided "min" and "max" functions in
-//case they are useful to you
+/*
+The task was to declare the rectangle structure and to write two functions - 
+rectangle canonicalize (takes a rectangle, and "fixes" its representation 
+by ensuring that the width and height are non-negative ), 
+rectangle intersection (which takes two rectangles (r1, and r2), and returns 
+the rectangle representing the intersection of the two.)
+*/
 int min (int a, int b) {
   if (a < b) {
     return a;
@@ -40,21 +45,7 @@ rectangle intersection(rectangle r1, rectangle r2) {
   //WRITE THIS FUNCTION   
   rectangle r;
   r1 = canonicalize(r1);
-  r2 = canonicalize(r2);  
-  /*I think the cases when rectangles do not intersect are 
-  * when r1 lies futher to the right or to the left of r2, it means 
-  * the right most edge of r1 (r1.x+r1.widht) ends before the left most edge of r2 (r2.x) starts 
-  * OR
-  * the right most edge of r2 (r2.x+r2.width) ends before the left most edge of r1(r1.x) starts
-  * r1.x+r1.widht < r2.x OR r2.x+r2.width < r1.x
-  * 
-  * they don't intersect, when one of the rectangles lower than the other
-  * when r1 is lower than r2 or r2 is lower than r1, it means 
-  * the top of r1(r1.y+r1.height) is lower than the bottom of r2(r2.y)
-  * OR
-  * the top of r2(r2.y+r2.height) is lower than the bottm of r1(r1.y)
-  * r1.y+r1.height < r2.y OR r2.y+r2.height < r1.y  
-  */ 
+  r2 = canonicalize(r2);   
   
   if (r1.x+r1.width < r2.x || r2.x+r2.width < r1.x) {  
     r.x = 0;
@@ -67,17 +58,8 @@ rectangle intersection(rectangle r1, rectangle r2) {
     r.y =0;
     r.width = 0;
     r.height =0;     
-    return r;
-  
-  }
-   
-    
-  /*Rectangles may only share one of the edges
-  * when they share left-right edge, then x values of this edge are the same for both rectangles
-  * the right most edge of r1 (r1.x+r1.width) can touch left most edge of r2(r2.x)
-  *OR
-  * the right most edge of r2(r2.x+r2.widht) can touch left most edge of r1(r1.x)
-  */
+    return r;  
+  }   
   
   if(r1.x+r1.width == r2.x || r2.x+r2.width == r1.x){
   r.x = max(r1.x,r2.x);
@@ -85,23 +67,17 @@ rectangle intersection(rectangle r1, rectangle r2) {
   r.width = 0;
   r.height = min(r1.y+r1.height,r2.y+r2.height)-r.y;
   return r;
-  } 
-    
-  if(r1.y+r1.height==r2.y || r2.y+r2.height==r1.y){
+  }else if(r1.y+r1.height==r2.y || r2.y+r2.height==r1.y){
   r.x = max(r1.x,r2.x); 
   r.y = min(r1.y+r1.height, r2.y+r2.height);
   r.width= min(r1.x+r1.width, r2.x+r2.width) - r.x; 
-  printf("min(r1.x, r2.x):%d minus r.x:%d is:%d", min(r1.x, r2.x),r.x, r.width);
   r.height = 0;
-  //printf("\n r.x and r.y:(%d,%d)\n r.width:(%d) r.height is zero\n", r.x, r.y, r.width);
-  return r;}
-  
-  //Finally the cases when rectangles do intersect
+  return r;}  
+   
   r.x = max(r1.x, r2.x);
   r.y = max(r1.y, r2.y);
   r.width = min(r1.x+r1.width, r2.x+r2.width)-r.x;
-  r.height = min(r1.y+r1.height,r2.y+r2.height)-r.y;
-   
+  r.height = min(r1.y+r1.height,r2.y+r2.height)-r.y;   
   return r;
 }
 
