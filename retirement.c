@@ -5,7 +5,8 @@
 
 
 //basic information about a person working or retired
-struct _retire_info{
+struct _retire_info
+{
 int months; //the number of months it is applicable to
 double contribution;//how many dollars are contributed (or spent if negative) from the account per month 
 double rate_of_return;//the rate of returns
@@ -32,13 +33,13 @@ void retirement (int startAge,   //in months
 {
   initial= alive(working,startAge,initial);
   startAge += working.months;
- alive(retired,startAge,initial);
+  alive(retired,startAge,initial);
 }
  
   int main(void){
     
-  retire_info working;
-  working.months= 489;
+    retire_info working;
+    working.months= 489;
     working.contribution = 1000;
     working.rate_of_return = 4.5;
     
