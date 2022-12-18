@@ -3,7 +3,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
 /* 
  * Determines if coord is in range between
  * offset (INCLUSIVE) and offset + size (EXCLUSIVE)
